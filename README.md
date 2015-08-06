@@ -1,4 +1,4 @@
-##清影PT签到说明
+##清影PT签到
 
 ###使用方法
 + 在sign.php中的usenam passwor中写上自己的账号密码
