@@ -1,6 +1,8 @@
 <?php
+        $fp = fopen("./log/log","a+");
+	fwrite($fp,date('Y-m-d H:i:s')." 开始！\n");	
 	$url = "http://pt.hit.edu.cn/takelogin.php";
-	$data = "username=&password=";
+	$data = "username=403519445@qq.com&password=mxx123456789";
 
 	$ch = curl_init($url);
 	$cookie =tempnam("./cookie/","cookie");
@@ -28,7 +30,6 @@
 		}
 		usleep(20000);
 	}
-	$fp = fopen("./log/log","a+");
 	if ($i == 100){
 		fwrite($fp,date('Y-m-d H:i:s')." Errorr!\n");
 		echo "Error!";
