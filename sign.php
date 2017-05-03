@@ -4,7 +4,7 @@
 	$fp2 = fopen("./log/return","a+");
 	fwrite($fp2,date('Y-M-D H:i:s')." 开始! \n");	
 	$url = "http://pt.hit.edu.cn/takelogin.php";
-	$data = "username=403519445@qq.com&password=mxx123456789";
+	$data = "username=&password=";
 
 	$ch = curl_init($url);
 	$cookie =tempnam("./cookie/","cookie");
