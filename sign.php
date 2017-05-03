@@ -1,6 +1,8 @@
 <?php
-        $fp = fopen("./log/log","a+");
-	fwrite($fp,date('Y-m-d H:i:s')." 开始！\n");	
+    $fp = fopen("./log/log","a+");
+	fwrite($fp,date('Y-m-d H:i:s')." 开始！\n");
+	$fp2 = fopen("./log/return","a+");
+	fwrite($fp2,date('Y-M-D H:i:s')." 开始! \n");	
 	$url = "http://pt.hit.edu.cn/takelogin.php";
 	$data = "username=403519445@qq.com&password=mxx123456789";
 
@@ -15,22 +17,29 @@
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 	curl_exec($ch);
 	curl_close($ch);
-	
+	$url = "http://pt.hit.edu.cn/take_signin_bonus.php";
 	for($i=0;$i<1000;$i++){
-		$url = "http://pt.hit.edu.cn/take_signin_bonus.php";
 		$ch = curl_init($url);	
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_COOKIEFILE,$cookie);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		$a = curl_exec($ch);
+		if($a == -1){
+			$url = "http://pt.hit.edu.cn/take_signin_bonus.php?redate=1";
+		}
 		echo $a;
+		fwrite($fp2,"**********".$i."********** \n".$a." \n \n");
 		curl_close($ch);
 		if(strstr($a,'成功') != ''){
 			break;
 		}
-		usleep(20000);
+		if(i > 100){
+			usleep(20000);
+		}else{
+			usleep(200);
+		}
 	}
-	if ($i == 100){
+	if ($i == 1000){
 		fwrite($fp,date('Y-m-d H:i:s')." Errorr!\n");
 		echo "Error!";
 	}else{
@@ -38,4 +47,5 @@
 		echo "Success";
 	}
 	fclose($fp);
+	fclose($fp2);
 ?>
